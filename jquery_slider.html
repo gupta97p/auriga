@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.image{
+			display: none;
+			width: 70%;
+			height: 550px;
+		}
+		.active{
+			display: block;
+		}
+		
+	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+		  <div class="container offset-3" id="slide">
+			<img src="https://live.staticflickr.com/4561/38054606355_26429c884f_b.jpg" class="image active">
+			<img src="https://datarepository.wolframcloud.com/resources/images/b7c/b7c36c1a-4fcb-4035-9950-636375ed736d-io-2-o.en.gif" class="image">
+			<img src="https://images-na.ssl-images-amazon.com/images/I/71aEils8ImL._SX466_.jpg" class="image">
+			<img src="https://c8.alamy.com/comp/WB2KY1/beautiful-nature-landscape-drawing-scenery-WB2KY1.jpg" class="image">
+			<img src="https://resources.matcha-jp.com/resize/720x2000/2020/04/23-101958.jpeg" class="image">
+			<img src="https://i.pinimg.com/originals/e8/c7/c4/e8c7c4d4e14a9e3b21faf3d7b37c5b03.jpg" class="image">
+	      </div>
+		  
+		  <div class="buttons mt-7 offset-3">
+		    <button class="controls btn btn-outline-info" id="previous">previous</button>
+
+		    <button class="controls btn btn-outline-info" id="pause">Pause</button>
+
+		    <button class="controls btn btn-outline-info" id="next">next</button>
+		  </div>
+
+
+		<script >
+				
+
+				var slides = document.querySelectorAll('.image');
+				var cslide = 0;
+				var slideInterval = setInterval(nextSlide,1000);
+
+				function previousSlide(){
+				    slideno(cslide-1);
+				}
+
+				function slideno(n){
+				    slides[cslide].className = 'image';
+				    cslide = (n+slides.length)%slides.length;
+				    slides[cslide].className = 'image active';
+				}
+
+
+				var playing = true;
+				var pauseButton = document.getElementById('pause');
+
+				function pauseSlide(){
+				    pauseButton.innerHTML = 'Play';
+				    pauseButton.className="controls btn btn-outline-dark ";
+				    playing = false;
+				    clearInterval(slideInterval);
+				}
+
+				function playSlide(){
+				    pauseButton.innerHTML = 'Pause'; 
+				    pauseButton.className="controls btn btn-outline-dark";
+				    playing = true;
+				    slideInterval = setInterval(nextSlide,1000);
+				}
+
+				pauseButton.onclick = function(){
+				    if(playing){
+						pauseSlide(); 
+					}
+				    else{ 
+						playSlide(); 
+					}
+				};
+
+				var next = document.getElementById('next');
+				var previous = document.getElementById('previous');
+
+				next.onclick = function(){
+				    nextSlide();
+				};
+				previous.onclick = function(){
+				    previousSlide();
+				};
+				function nextSlide(){
+				    slideno(cslide+1);
+				}
+
+
+		</script>
+</body>
+</html>
